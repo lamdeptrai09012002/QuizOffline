@@ -1,0 +1,26 @@
+QUIZ OFFLINE v1.3 - LOCAL PARSER TESTS
+
+1) Supplied DOCX: /mnt/data/5 cau.docx
+- OOXML document.xml inspection found 5 question headings.
+- Exactly one explicit FF0000 answer option in each question.
+- Correct options: B, D, B, C, C.
+
+2) Supplied PDF: /mnt/data/5_cau.pdf
+- Bundled JavaScript PDF parser was executed in Node with the supplied PDF bytes.
+- ToUnicode CMap decoding and baseline fragment reconstruction parsed 5 questions.
+- Correct options: B, D, B, C, C.
+
+3) Large-question stress test
+- The parser's question/option line assembly was run against 1,200 synthetic questions.
+- Result: 1,200 questions parsed, from Câu 1 through Câu 1200.
+
+4) JavaScript syntax
+- Inline application script passed `node --check`.
+
+5) Android project packaging
+- Android manifest checked: no INTERNET permission declared.
+- Updated WebView activity handles document-picker cancellation and releases the WebView on activity destruction.
+- GitHub Actions workflow added for reproducible debug APK builds.
+
+IMPORTANT
+These tests validate parser logic and the supplied samples, not APK installation or runtime behavior on a physical Android device. Android SDK / Gradle build tools were not available in the authoring environment, so no APK has been compiled.
