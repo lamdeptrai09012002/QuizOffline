@@ -18,10 +18,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Install Android platform and build tools
+      - name: Accept Android SDK licenses
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          sudo mkdir -p "$ANDROID_HOME/licenses"
+          echo -e "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" | sudo tee "$ANDROID_HOME/licenses/android-sdk-license" > /dev/null
+          echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" | sudo tee "$ANDROID_HOME/licenses/android-sdk-preview-license" > /dev/null
+          sudo chmod -R a+rwX "$ANDROID_HOME"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
